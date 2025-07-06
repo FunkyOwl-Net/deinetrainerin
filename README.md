@@ -50,6 +50,14 @@ Kompletter Relaunch der Website https://deinetrainerin.at/v2/ auf Basis von Lara
 8. Lokalen Server starten
    `php artisan serve`
 
+## Testing
+Nach dem Einrichten aller Abhängigkeiten kann die Testumgebung mit PHPUnit ausgeführt werden.
+
+1. Beispieltest ausführen:
+   `composer run test`
+   Dieser Befehl startet PHPUnit und führt alle Tests im Verzeichnis `tests` aus.
+2. Weitere Tests können im Ordner `tests` abgelegt werden. Die Konfiguration befindet sich in `phpunit.xml`.
+
 ## Datenmodelle (Task 2)
 Die grundlegenden Tabellen werden per Migration angelegt:
 - **users** – Name, E-Mail, Passwort-Hash und ein `is_admin` Flag.

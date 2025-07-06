@@ -24,7 +24,8 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "test": "@php vendor/bin/phpunit"
     },
     "config": {
         "sort-packages": true
