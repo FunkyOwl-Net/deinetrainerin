@@ -32,21 +32,48 @@ Kompletter Relaunch der Website https://deinetrainerin.at/v2/ auf Basis von Lara
 
 ## Setup (Development)
 1. Repository klonen  
-   `git clone ...`
+   `git clone <repo-url> && cd deinetrainerin`
+   Das Repository enthält bereits die grundlegende Laravel-Struktur.
 2. .env Datei konfigurieren (`cp .env.example .env` und anpassen)
-3. Abhängigkeiten installieren  
-   `composer install`  
-   `npm install && npm run build`
-4. App Key generieren  
+3. PHP-Abhängigkeiten installieren
+   `composer install`
+4. Node-Abhängigkeiten installieren
+   `npm install`
+   
+   Für die Entwicklung kann `npm run dev` verwendet werden,
+   um Tailwind im Watch-Modus zu starten. Für einen einmaligen
+   Build der Assets genügt `npm run build`.
+   (Internetverbindung erforderlich.)
+5. App Key generieren
    `php artisan key:generate`
-5. Datenbank anlegen und migraten  
+6. Datenbank anlegen und migraten
    `php artisan migrate`
-6. Seed-User/Admin anlegen  
+7. Seed-User/Admin anlegen
    `php artisan db:seed`
-7. (Optional) Storage-Link setzen  
+8. (Optional) Storage-Link setzen
    `php artisan storage:link`
-8. Lokalen Server starten  
+9. Lokalen Server starten
    `php artisan serve`
+10. In einem zweiten Terminal den Asset-Watcher starten
+    `npm run dev`
+
+    Anschließend ist die Seite unter http://localhost:8000 erreichbar.
+
+## Testing
+Nach dem Einrichten aller Abhängigkeiten kann die Testumgebung mit PHPUnit ausgeführt werden.
+
+1. Beispieltest ausführen:
+   `composer run test`
+   Dieser Befehl startet PHPUnit und führt alle Tests im Verzeichnis `tests` aus.
+2. Weitere Tests können im Ordner `tests` abgelegt werden. Die Konfiguration befindet sich in `phpunit.xml`.
+
+## Datenmodelle (Task 2)
+Die grundlegenden Tabellen werden per Migration angelegt:
+- **users** – Name, E-Mail, Passwort-Hash und ein `is_admin` Flag.
+- **pages** – Seitenslug, Titel und Inhalt jeweils auf Deutsch und Englisch sowie optionale Meta-Tags.
+- **appointments** – Termine mit Start-/Endzeit, Kundendaten und Status.
+- **translations** – Schluessel/Locale und Text für dynamische Übersetzungen.
+
 
 ## Deployment (Produktiv)
 - Production-ENV und DB einrichten
