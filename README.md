@@ -35,19 +35,21 @@ Kompletter Relaunch der Website https://deinetrainerin.at/v2/ auf Basis von Lara
    `git clone <repo-url> && cd deinetrainerin`
    Das Repository enthält bereits die grundlegende Laravel-Struktur.
 2. .env Datei konfigurieren (`cp .env.example .env` und anpassen)
-3. Abhängigkeiten installieren
+3. PHP-Abhängigkeiten installieren
    `composer install`
-   `npm install && npm run build`
-   (Die Paketinstallation benötigt Internetzugang.)
-4. App Key generieren
+4. Node-Abhängigkeiten installieren und Assets bauen
+   `npm install`
+   `npm run build`
+   (Internetverbindung erforderlich.)
+5. App Key generieren
    `php artisan key:generate`
-5. Datenbank anlegen und migraten  
+6. Datenbank anlegen und migraten
    `php artisan migrate`
-6. Seed-User/Admin anlegen  
+7. Seed-User/Admin anlegen
    `php artisan db:seed`
-7. (Optional) Storage-Link setzen  
+8. (Optional) Storage-Link setzen
    `php artisan storage:link`
-8. Lokalen Server starten
+9. Lokalen Server starten
    `php artisan serve`
 
 ## Testing

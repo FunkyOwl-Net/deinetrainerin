@@ -7,5 +7,6 @@
 /storage/framework/
 /storage/logs/
 /public/storage
+/public/css/
 /.idea/
 /.vscode/

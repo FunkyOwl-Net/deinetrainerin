@@ -1,0 +1,14 @@
+{
+  "name": "deinetrainerin",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tailwindcss -i resources/css/app.css -o public/css/app.css --watch",
+    "build": "tailwindcss -i resources/css/app.css -o public/css/app.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.34",
+    "autoprefixer": "^10.4.16"
+  }
+}
