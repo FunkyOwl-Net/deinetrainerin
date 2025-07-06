@@ -47,8 +47,16 @@ Kompletter Relaunch der Website https://deinetrainerin.at/v2/ auf Basis von Lara
    `php artisan db:seed`
 7. (Optional) Storage-Link setzen  
    `php artisan storage:link`
-8. Lokalen Server starten  
+8. Lokalen Server starten
    `php artisan serve`
+
+## Datenmodelle (Task 2)
+Die grundlegenden Tabellen werden per Migration angelegt:
+- **users** – Name, E-Mail, Passwort-Hash und ein `is_admin` Flag.
+- **pages** – Seitenslug, Titel und Inhalt jeweils auf Deutsch und Englisch sowie optionale Meta-Tags.
+- **appointments** – Termine mit Start-/Endzeit, Kundendaten und Status.
+- **translations** – Schluessel/Locale und Text für dynamische Übersetzungen.
+
 
 ## Deployment (Produktiv)
 - Production-ENV und DB einrichten
