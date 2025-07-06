@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*
+Styleguide
+---------
+Primary color: #e51b24 (class: bg-primary, text-primary)
+Secondary color: #1f2937 (class: bg-secondary, text-secondary)
+Buttons: @apply bg-primary text-white px-4 py-2 rounded;
+Cards: @apply bg-white shadow rounded p-6;
+*/
