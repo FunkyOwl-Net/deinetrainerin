@@ -59,3 +59,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Local Development
+
+1. Install dependencies with `npm install`.
+2. Compile assets and start Vite with `npm run dev`.
+3. Serve the application via `php artisan serve` (requires PHP 8.2+).
+
+The homepage is defined in `resources/views/home.blade.php` using Tailwind CSS and additional custom styles under `resources/css/app.css`.
