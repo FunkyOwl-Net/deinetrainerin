@@ -1,61 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projekt: deineTrainerin.at – Eigenentwicklung (Laravel)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Zielsetzung
+Kompletter Relaunch der Website https://deinetrainerin.at/v2/ auf Basis von Laravel 11, als Self-Hosted Lösung für eigenen Server, 100 % kostenfreie Libraries, deutsch/englisch, sehr einfach zu bedienen, mit eigenem CMS und Terminbuchung.
 
-## About Laravel
+## Features
+- **Komplett editierbare Inhalte (Texte, Bilder) per Backend/CMS**
+- **Online-Terminbuchungssystem** (eigene Entwicklung, kein externer Dienst)
+- **Mehrsprachigkeit** (Deutsch & Englisch, für alle Seiten und Funktionen)
+- **Kontaktformular** mit DSGVO-Checkbox
+- **Social Media-Links, Kartenintegration (DSGVO-konform), Impressum/Datenschutz**
+- **SEO-Optimierung** (Meta-Tags, Sitemap, Performance, strukturierte Daten)
+- **Responsives Design nach Styleguide der Originalseite**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
+- **Backend:** Laravel 11 (PHP 8.2+)
+- **Datenbank:** MariaDB/MySQL
+- **Frontend:** Tailwind CSS (oder Bootstrap 5), eigene Komponenten
+- **Kalender:** FullCalendar.js (MIT), Integration in eigene Buchungskomponente
+- **Mail:** PHPMailer (oder Laravel Mail), SMTP
+- **Mehrsprachigkeit:** Laravel Localization (lang files), Content in DB pro Sprache
+- **Bilder:** lokal oder S3-kompatibles Storage
+- **Sonstiges:** DSGVO-konformer Cookie Consent (z. B. Klaro.js), lokale Google Fonts
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Systemanforderungen
+- PHP 8.2+
+- Composer
+- MySQL/MariaDB
+- Node.js & npm (für Assets)
+- Linux Server (Apache/Nginx)
+- HTTPS/SSL empfohlen (Let’s Encrypt)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Setup (Development)
+1. Repository klonen  
+   `git clone <repo-url> && cd deinetrainerin`
+   Das Repository enthält bereits die grundlegende Laravel-Struktur.
+2. .env Datei konfigurieren (`cp .env.example .env` und anpassen)
+3. PHP-Abhängigkeiten installieren
+   `composer install`
+4. Node-Abhängigkeiten installieren
+   `npm install`
+   
+   Für die Entwicklung kann `npm run dev` verwendet werden,
+   um Tailwind im Watch-Modus zu starten. Für einen einmaligen
+   Build der Assets genügt `npm run build`.
+   (Internetverbindung erforderlich.)
+5. App Key generieren
+   `php artisan key:generate`
+6. Datenbank anlegen und migraten
+   `php artisan migrate`
+7. Seed-User/Admin anlegen
+   `php artisan db:seed`
+8. (Optional) Storage-Link setzen
+   `php artisan storage:link`
+9. Lokalen Server starten
+   `php artisan serve`
+10. In einem zweiten Terminal den Asset-Watcher starten
+    `npm run dev`
 
-## Learning Laravel
+    Anschließend ist die Seite unter http://localhost:8000 erreichbar.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Testing
+Nach dem Einrichten aller Abhängigkeiten kann die Testumgebung mit PHPUnit ausgeführt werden.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. Beispieltest ausführen:
+   `composer run test`
+   Dieser Befehl startet PHPUnit und führt alle Tests im Verzeichnis `tests` aus.
+2. Weitere Tests können im Ordner `tests` abgelegt werden. Die Konfiguration befindet sich in `phpunit.xml`.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Datenmodelle (Task 2)
+Die grundlegenden Tabellen werden per Migration angelegt:
+- **users** – Name, E-Mail, Passwort-Hash und ein `is_admin` Flag.
+- **pages** – Seitenslug, Titel und Inhalt jeweils auf Deutsch und Englisch sowie optionale Meta-Tags.
+- **appointments** – Termine mit Start-/Endzeit, Kundendaten und Status.
+- **translations** – Schluessel/Locale und Text für dynamische Übersetzungen.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Deployment (Produktiv)
+- Production-ENV und DB einrichten
+- Assets kompilieren: `npm run build`
+- Caching aktivieren: `php artisan config:cache route:cache view:cache`
+- HTTPS aktivieren
+- Cronjob für Termin-Erinnerungen etc. (optional)
 
-### Premium Partners
+## Wichtige Pfade & Strukturen
+- `app/Models` – Datenmodelle (Pages, Appointment, Translation, User)
+- `app/Http/Controllers` – Controller für Frontend, API, Backend (CMS)
+- `resources/views` – Blade Templates (Layout, Pages, Admin, Booking)
+- `resources/lang/de` und `resources/lang/en` – Sprachdateien
+- `routes/web.php` – Seitenrouten
+- `public/img` – Bilder
+- `storage/app/public` – Uploads
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## TODO / Offene Tasks
+Siehe Agents.md für komplette Aufgabenaufteilung.
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## FAQ
+- **Kann ich Inhalte ohne Code ändern?**  
+  Ja, alle Haupttexte und Bilder sind über das CMS/Backend pflegbar, inklusive Listen, Überschriften und Meta-Tags.
+- **Wie kann ich Termine verwalten?**  
+  Termine werden im Backend (nur für Admin) verwaltet, Nutzer sehen nur freie Slots.
+- **Wie werden Übersetzungen gepflegt?**  
+  Entweder in Sprachdateien (`resources/lang`) für statische UI-Elemente oder als Textfelder pro Sprache im Backend für editierbare Inhalte.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Autoren & Support
+- Hauptentwicklung: [Dein Name]
+- Kontakt: [Deine Mail]
+- Dokumentation: requirements.md, Agents.md, Handbuch.pdf
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+## Aktueller Stand (Phase 2)
+Die Basis-Struktur des CMS wurde implementiert. Tailwind CSS sorgt für das responsive Layout und ein einfaches Admin-Interface ermöglicht das Bearbeiten von Seiteninhalten auf Deutsch und Englisch. Zum Einsatz kommt CKEditor als WYSIWYG-Komponente. Ein Standard-Admin-User wird über den Seeder angelegt (`admin@example.com` / `password`).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
